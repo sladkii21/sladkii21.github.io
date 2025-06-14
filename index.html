@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Курс "Стрессоустойчивость"</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #27ae60;
+            --light-bg: #f8f9fa;
+            --dark-text: #333;
+            --light-text: #fff;
+        }
+        
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            background: #f0f2f5; 
+            color: var(--dark-text); 
+            margin: 0; 
+            padding: 0; 
+            line-height: 1.6;
+        }
+        
+        header, footer { 
+            background: var(--primary-color); 
+            color: var(--light-text); 
+            padding: 30px 20px; 
+            text-align: center; 
+        }
+        
+        section { 
+            padding: 40px 20px; 
+            max-width: 1200px; 
+            margin: 20px auto; 
+            background: white; 
+            border-radius: 10px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+        }
+        
+        h1, h2, h3, h4 { 
+            color: var(--primary-color); 
+            margin-top: 0;
+        }
+        
+        .button { 
+            background: var(--secondary-color); 
+            color: white; 
+            padding: 14px 28px; 
+            display: inline-block; 
+            border-radius: 6px; 
+            text-decoration: none; 
+            font-size: 18px; 
+            margin-top: 20px; 
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .button:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        }
+        
+        nav a { 
+            color: var(--light-text); 
+            margin: 0 15px; 
+            text-decoration: none; 
+            font-size: 18px; 
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        nav a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin: 25px 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        ul, ol { 
+            padding-left: 25px; 
+        }
+        
+        li {
+            margin-bottom: 10px;
+        }
+        
+        .module { 
+            margin-bottom: 30px; 
+            border: 1px solid #e0e0e0; 
+            border-radius: 10px; 
+            overflow: hidden; 
+            transition: all 0.3s ease;
+        }
+        
+        .module:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-3px);
+        }
+        
+        .module-header { 
+            background: var(--light-bg); 
+            padding: 20px; 
+            cursor: pointer; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            transition: all 0.3s ease;
+        }
+        
+        .module-header:hover {
+            background: #e9ecef;
+        }
+        
+        .module-header h3 { 
+            margin: 0; 
+            color: var(--primary-color); 
+            font-size: 1.3rem;
+        }
+        
+        .module-content { 
+            padding: 0 20px; 
+            max-height: 0; 
+            overflow: hidden; 
+            transition: max-height 0.5s ease-out; 
+        }
+        
+        .module.active .module-content { 
+            padding: 20px; 
+            max-height: 5000px; 
+        }
+        
+        .lecture { 
+            margin-bottom: 30px; 
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .lecture:last-child {
+            border-bottom: none;
+        }
+        
+        .test { 
+            background: var(--light-bg); 
+            padding: 25px; 
+            border-radius: 10px; 
+            margin-top: 30px; 
+        }
+        
+        .question { 
+            margin-bottom: 20px; 
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .test-button { 
+            background: var(--accent-color); 
+            color: white; 
+            border: none; 
+            padding: 12px 25px; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .test-button:hover {
+            background: #219653;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+        
+        .test-results { 
+            margin-top: 20px; 
+            font-weight: bold;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .progress-container {
+            width: 100%;
+            background: #e0e0e0;
+            border-radius: 5px;
+            margin: 20px 0;
+            height: 10px;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: var(--accent-color);
+            border-radius: 5px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .certificate {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border: 2px solid var(--primary-color);
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        
+        .certificate h3 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+        }
+        
+        .practice { 
+            background: #e3f2fd; 
+            padding: 20px; 
+            border-radius: 10px; 
+            margin: 20px 0; 
+        }
+        
+        @media (max-width: 768px) {
+            .button { font-size: 16px; padding: 12px 24px; }
+            nav a { display: block; margin: 10px 0; }
+            section { padding: 30px 15px; }
+            .module-header { padding: 15px; }
+            .module-content { padding: 0 15px; }
+            .module.active .module-content { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Курс "Стрессоустойчивость"</h1>
+    <nav>
+        <a href="#about">О курсе</a>
+        <a href="#modules">Модули</a>
+        <a href="#progress">Прогресс</a>
+        <a href="#signup">Запись</a>
+    </nav>
+</header>
+
+<section id="about">
+    <h2>О курсе</h2>
+    <p>10-модульный курс разработан для всех, кто хочет научиться управлять стрессом и сохранять внутреннее равновесие в напряжённых ситуациях.</p>
+    <p>Каждый модуль содержит:</p>
+    <ul>
+        <li>Подробные лекции с теорией и практическими примерами</li>
+        <li>Обучающие видео на русском языке</li>
+        <li>Практические задания для закрепления материала</li>
+        <li>Интерактивные тесты для проверки знаний</li>
+    </ul>
+    <div class="progress-container">
+        <div class="progress-bar" id="global-progress"></div>
+    </div>
+    <p>Ваш прогресс: <span id="progress-percent">0</span>%</p>
+</section>
+
+<section id="modules">
+    <h2>Программа курса</h2>
+
+    <!-- Модуль 1 -->
+    <div class="module" id="module1">
+        <div class="module-header" onclick="toggleModule(this)">
+            <h3>Модуль 1: Основы стрессоустойчивости</h3>
+            <span>▼</span>
+        </div>
+        <div class="module-content">
+            <div class="lecture">
+                <h4>Что такое стресс?</h4>
+                <p>В этом модуле вы узнаете:</p>
+                <ul>
+                    <li>Определение стресса и его виды</li>
+                    <li>Физиологические механизмы стрессовой реакции</li>
+                    <li>Стадии стресса по Селье</li>
+                    <li>Как отличить нормальный стресс от патологического</li>
+                </ul>
+                <div class="video-container">
+                    <iframe src="videos/vid1.mp4" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+            
+            <div class="practice">
+                <h4>Практическое задание</h4>
+                <p>В течение дня фиксируйте моменты, когда вы чувствуете стресс. Записывайте:</p>
+                <ol>
+                    <li>Ситуацию, вызвавшую стресс</li>
+                    <li>Ваши физические ощущения</li>
+                    <li>Эмоции, которые вы испытывали</li>
+                </ol>
+                <button class="button" onclick="completeTask(1)">Отметить как выполненное</button>
+                <p id="task1-status" style="display:none; color: var(--accent-color);">✓ Задание выполнено</p>
+            </div>
+            
+            <div class="test">
+                <h4>Тест по модулю 1</h4>
+                <div class="question">
+                    <p>1. Какая реакция НЕ является признаком стресса?</p>
+                    <input type="radio" name="q1" id="q1a"> <label for="q1a">Учащенное сердцебиение</label><br>
+                    <input type="radio" name="q1" id="q1b"> <label for="q1b">Повышенное давление</label><br>
+                    <input type="radio" name="q1" id="q1c"> <label for="q1c">Замедление обмена веществ</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>2. Кто ввел понятие "общий адаптационный синдром"?</p>
+                    <input type="radio" name="q2" id="q2a"> <label for="q2a">Ганс Селье</label><br>
+                    <input type="radio" name="q2" id="q2b"> <label for="q2b">Зигмунд Фрейд</label><br>
+                    <input type="radio" name="q2" id="q2c"> <label for="q2c">Иван Павлов</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>3. Какая стадия стресса по Селье следует за тревогой?</p>
+                    <input type="radio" name="q3" id="q3a"> <label for="q3a">Стадия сопротивления</label><br>
+                    <input type="radio" name="q3" id="q3b"> <label for="q3b">Стадия истощения</label><br>
+                    <input type="radio" name="q3" id="q3c"> <label for="q3c">Стадия восстановления</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>4. Какой вид стресса может быть полезен?</p>
+                    <input type="radio" name="q4" id="q4a"> <label for="q4a">Эустресс</label><br>
+                    <input type="radio" name="q4" id="q4b"> <label for="q4b">Дистресс</label><br>
+                    <input type="radio" name="q4" id="q4c"> <label for="q4c">Хронический стресс</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>5. Какой гормон выделяется при стрессе?</p>
+                    <input type="radio" name="q5" id="q5a"> <label for="q5a">Кортизол</label><br>
+                    <input type="radio" name="q5" id="q5b"> <label for="q5b">Инсулин</label><br>
+                    <input type="radio" name="q5" id="q5c"> <label for="q5c">Серотонин</label><br>
+                </div>
+                
+                <button class="test-button" onclick="checkTest(1)">Проверить ответы</button>
+                <div class="test-results" id="test-results-1"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модуль 2 -->
+    <div class="module" id="module2">
+        <div class="module-header" onclick="toggleModule(this)">
+            <h3>Модуль 2: Физиология стресса</h3>
+            <span>▼</span>
+        </div>
+        <div class="module-content">
+            <div class="lecture">
+                <h4>Как стресс влияет на организм</h4>
+                <p>В этом модуле:</p>
+                <ul>
+                    <li>Роль нервной системы в стрессе</li>
+                    <li>Гормоны стресса и их действие</li>
+                    <li>Влияние на сердечно-сосудистую систему</li>
+                    <li>Стресс и иммунитет</li>
+                </ul>
+                <div class="video-container">
+                    <iframe src="videos/vid2.mp4" allowfullscreen></iframe>
+                </div>
+            </div>
+            
+            <div class="practice">
+                <h4>Практическое задание</h4>
+                <p>Измерьте пульс в покое и при стрессе, сравните показатели.</p>
+                <button class="button" onclick="completeTask(2)">Отметить как выполненное</button>
+                <p id="task2-status" style="display:none; color: var(--accent-color);">✓ Задание выполнено</p>
+            </div>
+            
+            <div class="test">
+                <h4>Тест по модулю 2</h4>
+                <div class="question">
+                    <p>1. Какой гормон НЕ относится к стрессовым?</p>
+                    <input type="radio" name="q6" id="q6a"> <label for="q6a">Кортизол</label><br>
+                    <input type="radio" name="q6" id="q6b"> <label for="q6b">Адреналин</label><br>
+                    <input type="radio" name="q6" id="q6c"> <label for="q6c">Инсулин</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>2. Какая система организма активируется при стрессе?</p>
+                    <input type="radio" name="q7" id="q7a"> <label for="q7a">Симпатическая нервная</label><br>
+                    <input type="radio" name="q7" id="q7b"> <label for="q7b">Парасимпатическая нервная</label><br>
+                    <input type="radio" name="q7" id="q7c"> <label for="q7c">Пищеварительная</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>3. Как стресс влияет на иммунитет?</p>
+                    <input type="radio" name="q8" id="q8a"> <label for="q8a">Снижает его</label><br>
+                    <input type="radio" name="q8" id="q8b"> <label for="q8b">Укрепляет его</label><br>
+                    <input type="radio" name="q8" id="q8c"> <label for="q8c">Не влияет</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>4. Какой орган выделяет кортизол?</p>
+                    <input type="radio" name="q9" id="q9a"> <label for="q9a">Надпочечники</label><br>
+                    <input type="radio" name="q9" id="q9b"> <label for="q9b">Гипофиз</label><br>
+                    <input type="radio" name="q9" id="q9c"> <label for="q9c">Щитовидная железа</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>5. Какой эффект оказывает адреналин?</p>
+                    <input type="radio" name="q10" id="q10a"> <label for="q10a">Учащает сердцебиение</label><br>
+                    <input type="radio" name="q10" id="q10b"> <label for="q10b">Замедляет пищеварение</label><br>
+                    <input type="radio" name="q10" id="q10c"> <label for="q10c">Оба варианта верны</label><br>
+                </div>
+                
+                <button class="test-button" onclick="checkTest(2)">Проверить ответы</button>
+                <div class="test-results" id="test-results-2"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модуль 3 -->
+    <div class="module" id="module3">
+        <div class="module-header" onclick="toggleModule(this)">
+            <h3>Модуль 3: Дыхательные техники</h3>
+            <span>▼</span>
+        </div>
+        <div class="module-content">
+            <div class="lecture">
+                <h4>Техники для быстрого снятия стресса</h4>
+                <ul>
+                    <li>Диафрагмальное дыхание</li>
+                    <li>Метод "4-7-8"</li>
+                    <li>Квадратное дыхание</li>
+                    <li>Техника мгновенного успокоения</li>
+                </ul>
+                <div class="video-container">
+                    <iframe src="videos/vid3.mp4" allowfullscreen></iframe>
+                </div>
+            </div>
+            
+            <div class="practice">
+                <h4>Практическое задание</h4>
+                <p>Практикуйте технику "4-7-8" 3 раза в день.</p>
+                <button class="button" onclick="completeTask(3)">Отметить как выполненное</button>
+                <p id="task3-status" style="display:none; color: var(--accent-color);">✓ Задание выполнено</p>
+            </div>
+            
+            <div class="test">
+                <h4>Тест по модулю 3</h4>
+                <div class="question">
+                    <p>1. Какое дыхание наиболее эффективно?</p>
+                    <input type="radio" name="q11" id="q11a"> <label for="q11a">Частое</label><br>
+                    <input type="radio" name="q11" id="q11b"> <label for="q11b">Диафрагмальное</label><br>
+                    <input type="radio" name="q11" id="q11c"> <label for="q11c">Поверхностное</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>2. Какова последовательность в технике "4-7-8"?</p>
+                    <input type="radio" name="q12" id="q12a"> <label for="q12a">Вдох-задержка-выдох</label><br>
+                    <input type="radio" name="q12" id="q12b"> <label for="q12b">Выдох-задержка-вдох</label><br>
+                    <input type="radio" name="q12" id="q12c"> <label for="q12c">Задержка-вдох-выдох</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>3. Как долго нужно практиковать дыхательные упражнения?</p>
+                    <input type="radio" name="q13" id="q13a"> <label for="q13a">3-5 минут</label><br>
+                    <input type="radio" name="q13" id="q13b"> <label for="q13b">10-15 минут</label><br>
+                    <input type="radio" name="q13" id="q13c"> <label for="q13c">30 минут</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>4. Какая техника помогает быстро успокоиться?</p>
+                    <input type="radio" name="q14" id="q14a"> <label for="q14a">Квадратное дыхание</label><br>
+                    <input type="radio" name="q14" id="q14b"> <label for="q14b">Метод "4-7-8"</label><br>
+                    <input type="radio" name="q14" id="q14c"> <label for="q14c">Оба варианта верны</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>5. Как дыхание влияет на нервную систему?</p>
+                    <input type="radio" name="q15" id="q15a"> <label for="q15a">Активирует парасимпатическую</label><br>
+                    <input type="radio" name="q15" id="q15b"> <label for="q15b">Активирует симпатическую</label><br>
+                    <input type="radio" name="q15" id="q15c"> <label for="q15c">Не влияет</label><br>
+                </div>
+                
+                <button class="test-button" onclick="checkTest(3)">Проверить ответы</button>
+                <div class="test-results" id="test-results-3"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модуль 4 -->
+    <div class="module" id="module4">
+        <div class="module-header" onclick="toggleModule(this)">
+            <h3>Модуль 4: Работа с эмоциями</h3>
+            <span>▼</span>
+        </div>
+        <div class="module-content">
+            <div class="lecture">
+                <h4>Как управлять эмоциями</h4>
+                <ul>
+                    <li>Идентификация эмоций</li>
+                    <li>Техника "Стоп-эмоция"</li>
+                    <li>Дневник эмоций</li>
+                    <li>Методы дистанцирования</li>
+                </ul>
+                <div class="video-container">
+                    <iframe src="videos/vid4.mp4" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+            
+            <div class="practice">
+                <h4>Практическое задание</h4>
+                <p>Ведите дневник эмоций 3 дня.</p>
+                <button class="button" onclick="completeTask(4)">Отметить как выполненное</button>
+                <p id="task4-status" style="display:none; color: var(--accent-color);">✓ Задание выполнено</p>
+            </div>
+            
+            <div class="test">
+                <h4>Тест по модулю 4</h4>
+                <div class="question">
+                    <p>1. Что НЕ помогает в работе с эмоциями?</p>
+                    <input type="radio" name="q16" id="q16a"> <label for="q16a">Подавление</label><br>
+                    <input type="radio" name="q16" id="q16b"> <label for="q16b">Осознание</label><br>
+                    <input type="radio" name="q16" id="q16c"> <label for="q16c">Дневник</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>2. Какой первый шаг в управлении эмоциями?</p>
+                    <input type="radio" name="q17" id="q17a"> <label for="q17a">Идентификация</label><br>
+                    <input type="radio" name="q17" id="q17b"> <label for="q17b">Подавление</label><br>
+                    <input type="radio" name="q17" id="q17c"> <label for="q17c">Игнорирование</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>3. Что включает дневник эмоций?</p>
+                    <input type="radio" name="q18" id="q18a"> <label for="q18a">Ситуацию и реакцию</label><br>
+                    <input type="radio" name="q18" id="q18b"> <label for="q18b">Только ситуацию</label><br>
+                    <input type="radio" name="q18" id="q18c"> <label for="q18c">Только реакцию</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>4. Что такое техника "Стоп-эмоция"?</p>
+                    <input type="radio" name="q19" id="q19a"> <label for="q19a">Осознанное прерывание реакции</label><br>
+                    <input type="radio" name="q19" id="q19b"> <label for="q19b">Подавление эмоций</label><br>
+                    <input type="radio" name="q19" id="q19c"> <label for="q19c">Игнорирование ситуации</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>5. Как дистанцирование помогает в управлении эмоциями?</p>
+                    <input type="radio" name="q20" id="q20a"> <label for="q20a">Позволяет взглянуть со стороны</label><br>
+                    <input type="radio" name="q20" id="q20b"> <label for="q20b">Усиливает эмоции</label><br>
+                    <input type="radio" name="q20" id="q20c"> <label for="q20c">Не помогает</label><br>
+                </div>
+                
+                <button class="test-button" onclick="checkTest(4)">Проверить ответы</button>
+                <div class="test-results" id="test-results-4"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модуль 5 -->
+    <div class="module" id="module5">
+        <div class="module-header" onclick="toggleModule(this)">
+            <h3>Модуль 5: Когнитивные методы</h3>
+            <span>▼</span>
+        </div>
+        <div class="module-content">
+            <div class="lecture">
+                <h4>Как мысли влияют на стресс</h4>
+                <ul>
+                    <li>Когнитивные искажения</li>
+                    <li>Техника "Три колонки"</li>
+                    <li>Метод Сократа</li>
+                    <li>Работа с автоматическими мыслями</li>
+                </ul>
+                <div class="video-container">
+                    <iframe src="videos/vid5.mp4" allowfullscreen></iframe>
+                </div>
+            </div>
+            
+            <div class="practice">
+                <h4>Практическое задание</h4>
+                <p>Примените технику "Три колонки" к стрессовой мысли.</p>
+                <button class="button" onclick="completeTask(5)">Отметить как выполненное</button>
+                <p id="task5-status" style="display:none; color: var(--accent-color);">✓ Задание выполнено</p>
+            </div>
+            
+            <div class="test">
+                <h4>Тест по модулю 5</h4>
+                <div class="question">
+                    <p>1. Что является когнитивным искажением?</p>
+                    <input type="radio" name="q21" id="q21a"> <label for="q21a">"Все всегда против меня"</label><br>
+                    <input type="radio" name="q21" id="q21b"> <label for="q21b">"Я могу ошибаться"</label><br>
+                    <input type="radio" name="q21" id="q21c"> <label for="q21c">"Нужно проанализировать"</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>2. Что включает техника "Три колонки"?</p>
+                    <input type="radio" name="q22" id="q22a"> <label for="q22a">Мысль-искажение-альтернатива</label><br>
+                    <input type="radio" name="q22" id="q22b"> <label for="q22b">Ситуацию-реакцию-последствие</label><br>
+                    <input type="radio" name="q22" id="q22c"> <label for="q22c">Причину-следствие-вывод</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>3. Что такое метод Сократа?</p>
+                    <input type="radio" name="q23" id="q23a"> <label for="q23a">Вопросы для проверки мысли</label><br>
+                    <input type="radio" name="q23" id="q23b"> <label for="q23b">Метод убеждения</label><br>
+                    <input type="radio" name="q23" id="q23c"> <label for="q23c">Техника самовнушения</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>4. Как называются мысли, возникающие автоматически?</p>
+                    <input type="radio" name="q24" id="q24a"> <label for="q24a">Автоматические</label><br>
+                    <input type="radio" name="q24" id="q24b"> <label for="q24b">Подсознательные</label><br>
+                    <input type="radio" name="q24" id="q24c"> <label for="q24c">Интуитивные</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>5. Как когнитивные методы помогают при стрессе?</p>
+                    <input type="radio" name="q25" id="q25a"> <label for="q25a">Изменяют восприятие ситуации</label><br>
+                    <input type="radio" name="q25" id="q25b"> <label for="q25b">Подавляют эмоции</label><br>
+                    <input type="radio" name="q25" id="q25c"> <label for="q25c">Не помогают</label><br>
+                </div>
+                
+                <button class="test-button" onclick="checkTest(5)">Проверить ответы</button>
+                <div class="test-results" id="test-results-5"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модуль 6 -->
+    <div class="module" id="module6">
+        <div class="module-header" onclick="toggleModule(this)">
+            <h3>Модуль 6: Профилактика стресса</h3>
+            <span>▼</span>
+        </div>
+        <div class="module-content">
+            <div class="lecture">
+                <h4>Здоровый образ жизни</h4>
+                <ul>
+                    <li>Значение сна</li>
+                    <li>Питание против стресса</li>
+                    <li>Физическая активность</li>
+                    <li>Режим дня</li>
+                </ul>
+                <div class="video-container">
+                    <iframe src="videos/vid6.mp4" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+            
+            <div class="practice">
+                <h4>Практическое задание</h4>
+                <p>Составьте план здоровых привычек на неделю.</p>
+                <button class="button" onclick="completeTask(6)">Отметить как выполненное</button>
+                <p id="task6-status" style="display:none; color: var(--accent-color);">✓ Задание выполнено</p>
+            </div>
+            
+            <div class="test">
+                <h4>Тест по модулю 6</h4>
+                <div class="question">
+                    <p>1. Что НЕ способствует стрессоустойчивости?</p>
+                    <input type="radio" name="q26" id="q26a"> <label for="q26a">Злоупотребление кофеином</label><br>
+                    <input type="radio" name="q26" id="q26b"> <label for="q26b">Регулярные нагрузки</label><br>
+                    <input type="radio" name="q26" id="q26c"> <label for="q26c">Достаточный сон</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>2. Сколько нужно спать для снижения стресса?</p>
+                    <input type="radio" name="q27" id="q27a"> <label for="q27a">7-9 часов</label><br>
+                    <input type="radio" name="q27" id="q27b"> <label for="q27b">5-6 часов</label><br>
+                    <input type="radio" name="q27" id="q27c"> <label for="q27c">10-12 часов</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>3. Какие продукты помогают бороться со стрессом?</p>
+                    <input type="radio" name="q28" id="q28a"> <label for="q28a">Богатые магнием</label><br>
+                    <input type="radio" name="q28" id="q28b"> <label for="q28b">Богатые сахаром</label><br>
+                    <input type="radio" name="q28" id="q28c"> <label for="q28c">Жирные</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>4. Как физическая активность влияет на стресс?</p>
+                    <input type="radio" name="q29" id="q29a"> <label for="q29a">Снижает уровень кортизола</label><br>
+                    <input type="radio" name="q29" id="q29b"> <label for="q29b">Увеличивает уровень кортизола</label><br>
+                    <input type="radio" name="q29" id="q29c"> <label for="q29c">Не влияет</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>5. Почему важен режим дня?</p>
+                    <input type="radio" name="q30" id="q30a"> <label for="q30a">Снижает уровень стресса</label><br>
+                    <input type="radio" name="q30" id="q30b"> <label for="q30b">Увеличивает продуктивность</label><br>
+                    <input type="radio" name="q30" id="q30c"> <label for="q30c">Оба варианта верны</label><br>
+                </div>
+                
+                <button class="test-button" onclick="checkTest(6)">Проверить ответы</button>
+                <div class="test-results" id="test-results-6"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модуль 7 -->
+    <div class="module" id="module7">
+        <div class="module-header" onclick="toggleModule(this)">
+            <h3>Модуль 7: Стресс в отношениях</h3>
+            <span>▼</span>
+        </div>
+        <div class="module-content">
+            <div class="lecture">
+                <h4>Конфликты и стресс</h4>
+                <ul>
+                    <li>Техника "Я-высказываний"</li>
+                    <li>Активное слушание</li>
+                    <li>Управление гневом</li>
+                    <li>Установление границ</li>
+                </ul>
+                <div class="video-container">
+                    <iframe src="videos/vid7.mp4" allowfullscreen></iframe>
+                </div>
+            </div>
+            
+            <div class="practice">
+                <h4>Практическое задание</h4>
+                <p>Попробуйте технику "Я-высказываний" в конфликте.</p>
+                <button class="button" onclick="completeTask(7)">Отметить как выполненное</button>
+                <p id="task7-status" style="display:none; color: var(--accent-color);">✓ Задание выполнено</p>
+            </div>
+            
+            <div class="test">
+                <h4>Тест по модулю 7</h4>
+                <div class="question">
+                    <p>1. Что НЕ относится к активному слушанию?</p>
+                    <input type="radio" name="q31" id="q31a"> <label for="q31a">Перебивание</label><br>
+                    <input type="radio" name="q31" id="q31b"> <label for="q31b">Уточняющие вопросы</label><br>
+                    <input type="radio" name="q31" id="q31c"> <label for="q31c">Отзеркаливание</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>2. Как правильно формулировать "Я-высказывание"?</p>
+                    <input type="radio" name="q32" id="q32a"> <label for="q32a">Я чувствую... когда... потому что...</label><br>
+                    <input type="radio" name="q32" id="q32b"> <label for="q32b">Ты всегда... ты никогда...</label><br>
+                    <input type="radio" name="q32" id="q32c"> <label for="q32c">Это все из-за тебя...</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>3. Что помогает в управлении гневом?</p>
+                    <input type="radio" name="q33" id="q33a"> <label for="q33a">Пауза перед реакцией</label><br>
+                    <input type="radio" name="q33" id="q33b"> <label for="q33b">Выражение гнева</label><br>
+                    <input type="radio" name="q33" id="q33c"> <label for="q33c">Подавление гнева</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>4. Зачем нужны границы в отношениях?</p>
+                    <input type="radio" name="q34" id="q34a"> <label for="q34a">Для защиты от стресса</label><br>
+                    <input type="radio" name="q34" id="q34b"> <label for="q34b">Для контроля других</label><br>
+                    <input type="radio" name="q34" id="q34c"> <label for="q34c">Для манипуляции</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>5. Какой метод НЕ помогает в разрешении конфликтов?</p>
+                    <input type="radio" name="q35" id="q35a"> <label for="q35a">Поиск компромисса</label><br>
+                    <input type="radio" name="q35" id="q35b"> <label for="q35b">Оскорбления</label><br>
+                    <input type="radio" name="q35" id="q35c"> <label for="q35c">Активное слушание</label><br>
+                </div>
+                
+                <button class="test-button" onclick="checkTest(7)">Проверить ответы</button>
+                <div class="test-results" id="test-results-7"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модуль 8 -->
+    <div class="module" id="module8">
+        <div class="module-header" onclick="toggleModule(this)">
+            <h3>Модуль 8: Рабочий стресс</h3>
+            <span>▼</span>
+        </div>
+        <div class="module-content">
+            <div class="lecture">
+                <h4>Тайм-менеджмент</h4>
+                <ul>
+                    <li>Матрица Эйзенхауэра</li>
+                    <li>Метод "Помидора"</li>
+                    <li>Приоритезация задач</li>
+                    <li>Делегирование</li>
+                </ul>
+                <div class="video-container">
+                    <iframe src="videos/vid8.mp4" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+            
+            <div class="practice">
+                <h4>Практическое задание</h4>
+                <p>Примените матрицу Эйзенхауэра для планирования.</p>
+                <button class="button" onclick="completeTask(8)">Отметить как выполненное</button>
+                <p id="task8-status" style="display:none; color: var(--accent-color);">✓ Задание выполнено</p>
+            </div>
+            
+            <div class="test">
+                <h4>Тест по модулю 8</h4>
+                <div class="question">
+                    <p>1. Что помогает в управлении временем?</p>
+                    <input type="radio" name="q36" id="q36a"> <label for="q36a">Метод "Помидора"</label><br>
+                    <input type="radio" name="q36" id="q36b"> <label for="q36b">Многозадачность</label><br>
+                    <input type="radio" name="q36" id="q36c"> <label for="q36c">Работа без перерывов</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>2. Как классифицируются задачи в матрице Эйзенхауэра?</p>
+                    <input type="radio" name="q37" id="q37a"> <label for="q37a">Важные/срочные</label><br>
+                    <input type="radio" name="q37" id="q37b"> <label for="q37b">Сложные/простые</label><br>
+                    <input type="radio" name="q37" id="q37c"> <label for="q37c">Приятные/неприятные</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>3. Сколько длится один "помидор" в методе "Помидора"?</p>
+                    <input type="radio" name="q38" id="q38a"> <label for="q38a">25 минут</label><br>
+                    <input type="radio" name="q38" id="q38b"> <label for="q38b">45 минут</label><br>
+                    <input type="radio" name="q38" id="q38c"> <label for="q38c">60 минут</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>4. Какие задачи следует делегировать?</p>
+                    <input type="radio" name="q39" id="q39a"> <label for="q39a">Неважные и несрочные</label><br>
+                    <input type="radio" name="q39" id="q39b"> <label for="q39b">Важные, но не срочные</label><br>
+                    <input type="radio" name="q39" id="q39c"> <label for="q39c">Срочные, но не важные</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>5. Какой принцип НЕ относится к тайм-менеджменту?</p>
+                    <input type="radio" name="q40" id="q40a"> <label for="q40a">Делать все самому</label><br>
+                    <input type="radio" name="q40" id="q40b"> <label for="q40b">Планировать перерывы</label><br>
+                    <input type="radio" name="q40" id="q40c"> <label for="q40c">Расставлять приоритеты</label><br>
+                </div>
+                
+                <button class="test-button" onclick="checkTest(8)">Проверить ответы</button>
+                <div class="test-results" id="test-results-8"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модуль 9 -->
+    <div class="module" id="module9">
+        <div class="module-header" onclick="toggleModule(this)">
+            <h3>Модуль 9: Восстановление ресурсов</h3>
+            <span>▼</span>
+        </div>
+        <div class="module-content">
+            <div class="lecture">
+                <h4>Техники релаксации</h4>
+                <ul>
+                    <li>Прогрессивная мышечная релаксация</li>
+                    <li>Медитация</li>
+                    <li>Визуализация</li>
+                    <li>Арт-терапия</li>
+                </ul>
+                <div class="video-container">
+                    <iframe src="videos/vid9.mp4" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+            
+            <div class="practice">
+                <h4>Практическое задание</h4>
+                <p>Попробуйте технику прогрессивной релаксации.</p>
+                <button class="button" onclick="completeTask(9)">Отметить как выполненное</button>
+                <p id="task9-status" style="display:none; color: var(--accent-color);">✓ Задание выполнено</p>
+            </div>
+            
+            <div class="test">
+                <h4>Тест по модулю 9</h4>
+                <div class="question">
+                    <p>1. Что НЕ относится к релаксации?</p>
+                    <input type="radio" name="q41" id="q41a"> <label for="q41a">Учащенное дыхание</label><br>
+                    <input type="radio" name="q41" id="q41b"> <label for="q41b">Медитация</label><br>
+                    <input type="radio" name="q41" id="q41c"> <label for="q41c">Визуализация</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>2. Как работает прогрессивная релаксация?</p>
+                    <input type="radio" name="q42" id="q42a"> <label for="q42a">Через напряжение и расслабление мышц</label><br>
+                    <input type="radio" name="q42" id="q42b"> <label for="q42b">Через контроль дыхания</label><br>
+                    <input type="radio" name="q42" id="q42c"> <label for="q42c">Через физические упражнения</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>3. Сколько времени нужно для медитации?</p>
+                    <input type="radio" name="q43" id="q43a"> <label for="q43a">От 5 минут</label><br>
+                    <input type="radio" name="q43" id="q43b"> <label for="q43b">Не менее 30 минут</label><br>
+                    <input type="radio" name="q43" id="q43c"> <label for="q43c">Только утром</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>4. Что такое визуализация?</p>
+                    <input type="radio" name="q44" id="q44a"> <label for="q44a">Создание мысленных образов</label><br>
+                    <input type="radio" name="q44" id="q44b"> <label for="q44b">Рисование картин</label><br>
+                    <input type="radio" name="q44" id="q44c"> <label for="q44c">Просмотр видео</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>5. Как арт-терапия помогает при стрессе?</p>
+                    <input type="radio" name="q45" id="q45a"> <label for="q45a">Позволяет выразить эмоции</label><br>
+                    <input type="radio" name="q45" id="q45b"> <label for="q45b">Развивает творческие способности</label><br>
+                    <input type="radio" name="q45" id="q45c"> <label for="q45c">Оба варианта верны</label><br>
+                </div>
+                
+                <button class="test-button" onclick="checkTest(9)">Проверить ответы</button>
+                <div class="test-results" id="test-results-9"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модуль 10 -->
+    <div class="module" id="module10">
+        <div class="module-header" onclick="toggleModule(this)">
+            <h3>Модуль 10: Интеграция практик</h3>
+            <span>▼</span>
+        </div>
+        <div class="module-content">
+            <div class="lecture">
+                <h4>Персональная система</h4>
+                <ul>
+                    <li>Анализ триггеров стресса</li>
+                    <li>Подбор эффективных техник</li>
+                    <li>Создание "антистресс-набора"</li>
+                    <li>План действий в кризисных ситуациях</li>
+                </ul>
+                <div class="video-container">
+                    <iframe src="videos/vid10.mp4" allowfullscreen></iframe>
+                </div>
+            </div>
+            
+            <div class="practice">
+                <h4>Практическое задание</h4>
+                <p>Разработайте свою систему стрессоустойчивости.</p>
+                <button class="button" onclick="completeTask(10)">Отметить как выполненное</button>
+                <p id="task10-status" style="display:none; color: var(--accent-color);">✓ Задание выполнено</p>
+            </div>
+            
+            <div class="test">
+                <h4>Итоговый тест</h4>
+                <div class="question">
+                    <p>1. Что НЕ входит в систему стрессоустойчивости?</p>
+                    <input type="radio" name="q46" id="q46a"> <label for="q46a">Игнорирование проблем</label><br>
+                    <input type="radio" name="q46" id="q46b"> <label for="q46b">Регулярная практика</label><br>
+                    <input type="radio" name="q46" id="q46c"> <label for="q46c">Здоровый образ жизни</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>2. Как определить триггеры стресса?</p>
+                    <input type="radio" name="q47" id="q47a"> <label for="q47a">Анализ ситуаций и реакций</label><br>
+                    <input type="radio" name="q47" id="q47b"> <label for="q47b">Догадки</label><br>
+                    <input type="radio" name="q47" id="q47c"> <label for="q47c">Советы друзей</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>3. Что должно быть в "антистресс-наборе"?</p>
+                    <input type="radio" name="q48" id="q48a"> <label for="q48a">Проверенные техники</label><br>
+                    <input type="radio" name="q48" id="q48b"> <label for="q48b">Любимая музыка</label><br>
+                    <input type="radio" name="q48" id="q48c"> <label for="q48c">Оба варианта верны</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>4. Как часто нужно практиковать техники?</p>
+                    <input type="radio" name="q49" id="q49a"> <label for="q49a">Регулярно</label><br>
+                    <input type="radio" name="q49" id="q49b"> <label for="q49b">Только при стрессе</label><br>
+                    <input type="radio" name="q49" id="q49c"> <label for="q49c">Раз в месяц</label><br>
+                </div>
+                
+                <div class="question">
+                    <p>5. Какой главный принцип стрессоустойчивости?</p>
+                    <input type="radio" name="q50" id="q50a"> <label for="q50a">Профилактика и регулярность</label><br>
+                    <input type="radio" name="q50" id="q50b"> <label for="q50b">Разовые усилия</label><br>
+                    <input type="radio" name="q50" id="q50c"> <label for="q50c">Ожидание помощи</label><br>
+                </div>
+                
+                <button class="test-button" onclick="checkTest(10)">Проверить ответы</button>
+                <div class="test-results" id="test-results-10"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="progress">
+    <h2>Ваш прогресс</h2>
+    <div class="progress-container">
+        <div class="progress-bar" id="detailed-progress"></div>
+    </div>
+    <p>Вы завершили <span id="completed-modules">0</span> из 10 модулей</p>
+    
+    <div class="certificate" id="certificate">
+        <h3>Сертификат о прохождении курса</h3>
+        <p>Настоящий сертификат подтверждает, что</p>
+        <p><strong id="student-name">Имя Фамилия</strong></p>
+        <p>успешно завершил(а) курс "Стрессоустойчивость"</p>
+        <p><span id="certificate-date"></span></p>
+        <button class="button" onclick="printCertificate()">Распечатать сертификат</button>
+    </div>
+</section>
+
+<section id="signup">
+    <h2>Записаться на курс</h2>
+    <p>Оставьте заявку — и получите доступ ко всем 10 модулям курса с тестами и дополнительными материалами:</p>
+    <form id="signup-form">
+        <input type="text" id="name" placeholder="Ваше имя" required style="padding: 12px; width: 300px; max-width: 100%; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 15px; display: block;">
+        <input type="email" id="email" placeholder="Ваш email" required style="padding: 12px; width: 300px; max-width: 100%; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 15px; display: block;">
+        <button type="submit" class="button">Записаться</button>
+    </form>
+</section>
+
+<footer>
+    <p>&copy; 2025 Онлайн-Курс. Все права защищены.</p>
+</footer>
+
+<script>
+    // Состояние курса
+    const courseState = {
+        completedModules: [],
+        completedTasks: [],
+        testResults: {}
+    };
+
+    // Инициализация при загрузке страницы
+    document.addEventListener('DOMContentLoaded', function() {
+        // Загрузка состояния из localStorage
+        const savedState = localStorage.getItem('courseState');
+        if (savedState) {
+            Object.assign(courseState, JSON.parse(savedState));
+        }
+        
+        updateProgress();
+        
+        // Обработчик формы
+        document.getElementById('signup-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            
+            // Сохраняем имя для сертификата
+            document.getElementById('student-name').textContent = name;
+            
+            alert(`Спасибо, ${name}! На адрес ${email} отправлено письмо с доступом к курсу.`);
+            this.reset();
+        });
+    });
+
+    // Переключение модулей
+    function toggleModule(header) {
+        const module = header.parentElement;
+        module.classList.toggle('active');
+        const arrow = header.querySelector('span');
+        arrow.textContent = module.classList.contains('active') ? '▲' : '▼';
+        
+        // Отмечаем модуль как просмотренный
+        const moduleId = module.id.replace('module', '');
+        if (!courseState.completedModules.includes(moduleId)) {
+            courseState.completedModules.push(moduleId);
+            saveState();
+            updateProgress();
+        }
+    }
+
+    // Проверка тестов
+    function checkTest(moduleNum) {
+        let score = 0;
+        const results = document.getElementById(`test-results-${moduleNum}`);
+        const correctAnswers = {
+            1: ['q1c', 'q2a', 'q3a', 'q4a', 'q5a'],
+            2: ['q6c', 'q7a', 'q8a', 'q9a', 'q10c'],
+            3: ['q11b', 'q12a', 'q13a', 'q14c', 'q15a'],
+            4: ['q16a', 'q17a', 'q18a', 'q19a', 'q20a'],
+            5: ['q21a', 'q22a', 'q23a', 'q24a', 'q25a'],
+            6: ['q26a', 'q27a', 'q28a', 'q29a', 'q30c'],
+            7: ['q31a', 'q32a', 'q33a', 'q34a', 'q35b'],
+            8: ['q36a', 'q37a', 'q38a', 'q39c', 'q40a'],
+            9: ['q41a', 'q42a', 'q43a', 'q44a', 'q45c'],
+            10: ['q46a', 'q47a', 'q48c', 'q49a', 'q50a']
+        };
+        
+        // Сброс подсветки
+        document.querySelectorAll(`#module${moduleNum} label`).forEach(label => {
+            label.style.color = '';
+            label.style.fontWeight = '';
+        });
+        
+        // Проверка ответов
+        correctAnswers[moduleNum].forEach(correctId => {
+            if (document.getElementById(correctId).checked) {
+                score++;
+            }
+            // Подсветка правильного ответа
+            document.getElementById(correctId).nextElementSibling.style.color = "green";
+            document.getElementById(correctId).nextElementSibling.style.fontWeight = "bold";
+        });
+        
+        const totalQuestions = 5;
+        const percentage = Math.round((score / totalQuestions) * 100);
+        
+        results.innerHTML = `Вы ответили правильно на ${score} из ${totalQuestions} вопросов (${percentage}%)`;
+        results.style.display = 'block';
+        
+        // Сохраняем результат теста
+        courseState.testResults[moduleNum] = percentage;
+        saveState();
+        updateProgress();
+        
+        // Проверка на завершение курса
+        if (moduleNum === 10 && percentage >= 70) {
+            showCertificate();
+        }
+    }
+
+    // Отметка задания как выполненного
+    function completeTask(taskNum) {
+        if (!courseState.completedTasks.includes(taskNum)) {
+            courseState.completedTasks.push(taskNum);
+            document.getElementById(`task${taskNum}-status`).style.display = 'block';
+            saveState();
+            updateProgress();
+        }
+    }
+
+    // Обновление прогресса
+    function updateProgress() {
+        // Общий прогресс (модули + задания + тесты)
+        const totalModules = 10;
+        const completedModules = courseState.completedModules.length;
+        
+        const totalTasks = 10;
+        const completedTasks = courseState.completedTasks.length;
+        
+        let testProgress = 0;
+        Object.values(courseState.testResults).forEach(score => {
+            testProgress += score;
+        });
+        const averageTestScore = Object.keys(courseState.testResults).length > 0 
+            ? testProgress / Object.keys(courseState.testResults).length 
+            : 0;
+        
+        // Вес каждого компонента: модули 30%, задания 30%, тесты 40%
+        const totalProgress = Math.min(
+            (completedModules / totalModules * 30) + 
+            (completedTasks / totalTasks * 30) + 
+            (averageTestScore * 0.4),
+            100
+        );
+        
+        document.getElementById('global-progress').style.width = `${totalProgress}%`;
+        document.getElementById('detailed-progress').style.width = `${(completedModules / totalModules) * 100}%`;
+        document.getElementById('progress-percent').textContent = Math.round(totalProgress);
+        document.getElementById('completed-modules').textContent = completedModules;
+        
+        // Сохранение в localStorage
+        saveState();
+    }
+
+    // Показать сертификат
+    function showCertificate() {
+        const today = new Date();
+        const dateStr = today.toLocaleDateString('ru-RU', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
+        document.getElementById('certificate-date').textContent = dateStr;
+        document.getElementById('certificate').style.display = 'block';
+    }
+
+    // Печать сертификата
+    function printCertificate() {
+        const printContents = document.getElementById('certificate').outerHTML;
+        const originalContents = document.body.innerHTML;
+        
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+        
+        // Восстановление состояния
+        updateProgress();
+    }
+
+    // Сохранение состояния
+    function saveState() {
+        localStorage.setItem('courseState', JSON.stringify(courseState));
+    }
+</script>
+</body>
+</html>
